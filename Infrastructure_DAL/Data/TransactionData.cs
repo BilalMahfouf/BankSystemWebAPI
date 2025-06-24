@@ -45,7 +45,7 @@ namespace Infrastructure_DAL.Data
                 .FirstOrDefaultAsync(t => t.TransactionID == TransactionID);
         }
 
-        public async Task<IEnumerable<Transaction>> GetAllTransactionsAsync()
+        public async Task<IEnumerable<Transaction>> GetAllAsync()
         {
             return await _context.Transactions.ToListAsync();
         }

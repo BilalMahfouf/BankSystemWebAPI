@@ -9,7 +9,7 @@ namespace Infrastructure_DAL.Interfaces
 {
     public  interface IUserData
     {
-        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<IEnumerable<User>> GetAllAsync();
         Task<User?> FindByIDAsync(int UserID);
         Task<bool> AddNewAsync(User NewUser);
         Task<bool> UpdateAsync(User User);

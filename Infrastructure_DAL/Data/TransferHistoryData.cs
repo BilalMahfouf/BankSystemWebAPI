@@ -49,7 +49,7 @@ namespace Infrastructure_DAL.Data
                 .FirstOrDefaultAsync(t => t.TransferID == TransferHistoryID);
         }
 
-        public async Task<IEnumerable<TransferHistory>> GetAllTransferHistoriesAsync()
+        public async Task<IEnumerable<TransferHistory>> GetAllAsync()
         {
             return await _context.TransferHistories.ToListAsync();
         }

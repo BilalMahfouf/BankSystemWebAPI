@@ -9,7 +9,7 @@ namespace Infrastructure_DAL.Interfaces
 {
     public interface IClientData
     {
-        Task<IEnumerable<Client>> GetAllClientsAsync();
+        Task<IEnumerable<Client>> GetAllCAsync();
         Task<Client?> FindByIDAsync(int ClientID);
         Task<bool> AddNewAsync(Client NewClient);
         Task<bool> UpdateAsync(Client Client);

@@ -44,7 +44,7 @@ namespace Infrastructure_DAL.Data
                 .FirstOrDefaultAsync(e => e.EmployeeID == EmployeeID);
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
+        public async Task<IEnumerable<Employee>> GetAllAsync()
         {
             return await _context.Employees.ToListAsync();
         }

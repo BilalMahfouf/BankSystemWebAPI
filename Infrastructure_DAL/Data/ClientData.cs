@@ -46,7 +46,7 @@ namespace Infrastructure_DAL.Data
                 .FirstOrDefaultAsync(c => c.ClientID == ClientID);
         }
 
-        public async Task<IEnumerable<Client>> GetAllClientsAsync()
+        public async Task<IEnumerable<Client>> GetAllCAsync()
         {
             return await _context.Clients.ToListAsync();
         }
