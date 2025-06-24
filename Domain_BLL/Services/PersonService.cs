@@ -18,7 +18,7 @@ namespace Domain_BLL.Services
         }
         public Task<IEnumerable<Person>> GetAllPeopleAsync()
         {
-            return _personData.GetAllPeople();
+            return _personData.GetAllAsync();
         }
     }
 }
