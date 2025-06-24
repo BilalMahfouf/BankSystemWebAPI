@@ -20,6 +20,10 @@ namespace Infrastructure_DAL.Data
 
         public async Task<bool> AddNewAsync(Employee NewEmployee)
         {
+            if(NewEmployee is null)
+            {
+                throw new ArgumentNullException(nameof(NewEmployee));
+            }
            await _context.Employees.AddAsync(NewEmployee);
             return await _context.SaveChangesAsync() > 0;
         }
@@ -47,7 +51,10 @@ namespace Infrastructure_DAL.Data
 
         public async Task<bool> UpdateAsync(Employee Employee)
         {
-            if(Employee is null) return false;
+            if(Employee is null)
+            {
+                throw new ArgumentNullException(nameof(Employee));
+            }
 
             _context.Employees.Update(Employee);
             return await _context.SaveChangesAsync() > 0;

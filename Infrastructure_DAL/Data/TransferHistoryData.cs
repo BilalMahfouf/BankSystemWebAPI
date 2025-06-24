@@ -1,6 +1,7 @@
 ﻿using Infrastructure_DAL.Interfaces;
 using Infrastructure_DAL.Models;
 using Infrastructure_DAL.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,32 +15,55 @@ namespace Infrastructure_DAL.Data
         private readonly BankSystemDbContext _context;
         public TransferHistoryData(BankSystemDbContext context) 
         {
-         _context = context;
+            _context = context;
         }
 
-        public async Task<int> AddNewAsync(TransferHistory NewTransferHistory)
+        public async Task<bool> AddNewAsync(TransferHistory NewTransferHistory)
         {
-            throw new NotImplementedException();
+
+            if (NewTransferHistory is null)
+            {
+                throw new ArgumentNullException(nameof(NewTransferHistory));
+            }
+
+            await _context.TransferHistories.AddAsync(NewTransferHistory);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DeleteAsync(int TransferHistoryID)
         {
-            throw new NotImplementedException();
+            var TransferHistory = await _context.TransferHistories.FindAsync(TransferHistoryID);
+            if (TransferHistory is null) 
+            {
+            return false;
+            }
+            _context.TransferHistories.Remove(TransferHistory);
+            return await _context.SaveChangesAsync() > 0;
+        
         }
 
-        public async Task<TransferHistory>? FindByIDAsync(int TransferHistoryID)
+        public async Task<TransferHistory?> FindByIDAsync(int TransferHistoryID)
         {
-            throw new NotImplementedException();
+            return await _context.TransferHistories.Include(t => t.FromClient)
+                .Include(t => t.ToClient).Include(t => t.CreatedByUser)
+                .FirstOrDefaultAsync(t => t.TransferID == TransferHistoryID);
         }
 
         public async Task<IEnumerable<TransferHistory>> GetAllTransferHistoriesAsync()
         {
-            throw new NotImplementedException();
+            return await _context.TransferHistories.ToListAsync();
         }
 
-        public async Task<bool> UpdateAsync(int TransferHistoryID, TransferHistory TransferHistory)
+        public async Task<bool> UpdateAsync(TransferHistory TransferHistory)
         {
-            throw new NotImplementedException();
+
+            if (TransferHistory is null)
+            {
+                throw new ArgumentNullException(nameof(TransferHistory));
+            }
+
+             _context.TransferHistories.Update(TransferHistory);
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

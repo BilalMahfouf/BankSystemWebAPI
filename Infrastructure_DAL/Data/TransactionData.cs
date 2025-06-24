@@ -1,6 +1,7 @@
 ﻿using Infrastructure_DAL.Interfaces;
 using Infrastructure_DAL.Models;
 using Infrastructure_DAL.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,29 +18,47 @@ namespace Infrastructure_DAL.Data
             _context = context;
         }
 
-        public async Task<int> AddNewAsync(Transaction NewTransaction)
+        public async Task<bool> AddNewAsync(Transaction NewTransaction)
         {
-            throw new NotImplementedException();
+           if (NewTransaction is null)
+            {
+                throw new ArgumentNullException(nameof(NewTransaction));
+            }
+           
+            await _context.Transactions.AddAsync(NewTransaction);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DeleteAsync(int TransactionID)
         {
-            throw new NotImplementedException();
+            var Transaction = await _context.Transactions.FindAsync(TransactionID);
+            if (Transaction is null) return false;
+
+            _context.Transactions.Remove(Transaction);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Employee>? FindByIDAsync(int TransactionID)
+        public async Task<Transaction?> FindByIDAsync(int TransactionID)
         {
-            throw new NotImplementedException();
+            return await _context.Transactions.Include(t => t.TransactionType)
+                .Include(t => t.Client).Include(t => t.CreatedByUser)
+                .FirstOrDefaultAsync(t => t.TransactionID == TransactionID);
         }
 
         public async Task<IEnumerable<Transaction>> GetAllTransactionsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Transactions.ToListAsync();
         }
 
-        public async Task<bool> UpdateAsync(int TransactionID, Transaction Transaction)
+        public async Task<bool> UpdateAsync(Transaction Transaction)
         {
-            throw new NotImplementedException();
+            if (Transaction is null)
+            {
+                throw new ArgumentNullException(nameof(Transaction));
+            }
+
+             _context.Transactions.Update(Transaction);
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

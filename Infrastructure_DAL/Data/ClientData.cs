@@ -21,6 +21,10 @@ namespace Infrastructure_DAL.Data
 
         public async Task<bool> AddNewAsync(Client NewClient)
         {
+            if(NewClient is null)
+            {
+                throw new ArgumentNullException(nameof(NewClient));
+            }
            await _context.Clients.AddAsync(NewClient);
             return await _context.SaveChangesAsync() > 0;
             
@@ -49,7 +53,10 @@ namespace Infrastructure_DAL.Data
 
         public async Task<bool> UpdateAsync(Client Client)
         {
-            if(Client is null) return false;
+            if(Client is null)
+            {
+                throw new ArgumentNullException(nameof(Client));
+            }
 
             _context.Clients.Update(Client);
             return await _context.SaveChangesAsync() > 0;

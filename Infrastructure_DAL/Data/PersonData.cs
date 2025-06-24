@@ -1,6 +1,7 @@
 ﻿using Infrastructure_DAL.Interfaces;
 using Infrastructure_DAL.Models;
 using Infrastructure_DAL.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,29 +18,46 @@ namespace Infrastructure_DAL.Data
             _context = context;
         }
 
-        public async Task<int> AddNewAsync(Person NewPerson)
+        public async Task<bool> AddNewAsync(Person NewPerson)
         {
-            throw new NotImplementedException();
+            if (NewPerson is null)
+            {
+                throw new ArgumentNullException(nameof(NewPerson));
+            }
+
+            await _context.AddAsync(NewPerson);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DeleteAsync(int PersonID)
         {
-            throw new NotImplementedException();
+            var Person = await _context.People.FindAsync(PersonID);
+            if (Person is null) return false;
+
+            _context.Remove(Person);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Person>? FindByIDAsync(int PersonID)
+        public async Task<Person?> FindByIDAsync(int PersonID)
         {
-            throw new NotImplementedException();
+            return await _context.People.Include(p => p.NationalityCountry)
+                .FirstOrDefaultAsync(p => p.ID == PersonID);
         }
 
         public async Task<IEnumerable<Person>> GetAllPeopleAsync()
         {
-            throw new NotImplementedException();
+            return await _context.People.ToListAsync();
         }
 
-        public async Task<bool> UpdateAsync(int PersonID, Person Person)
+        public async Task<bool> UpdateAsync(Person Person)
         {
-            throw new NotImplementedException();
+            if (Person is null)
+            {
+                throw new ArgumentNullException(nameof(Person));
+            }
+
+            _context.People.Update(Person);
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
