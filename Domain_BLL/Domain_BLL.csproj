@@ -10,8 +10,4 @@
     <ProjectReference Include="..\Infrastructure_DAL\Infrastructure_DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>
