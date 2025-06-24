@@ -9,10 +9,10 @@ namespace Infrastructure_DAL.Interfaces
 {
     public interface IClientData
     {
-        Task<IEnumerable<Client>> GetAllClients();
-        Task<Client>? FindByID(int ClientID);
-        Task<int> AddNew(Client NewClient);
-        Task<bool> Update(int ClientID, Client Client);
-        Task<bool> Delete(int ClientID);
+        Task<IEnumerable<Client>> GetAllClientsAsync();
+        Task<Client?> FindByIDAsync(int ClientID);
+        Task<bool> AddNewAsync(Client NewClient);
+        Task<bool> UpdateAsync(Client Client);
+        Task<bool> DeleteAsync(int ClientID);
     }
 }

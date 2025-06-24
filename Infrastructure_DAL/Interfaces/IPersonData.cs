@@ -9,10 +9,10 @@ namespace Infrastructure_DAL.Interfaces
 {
     public interface IPersonData
     {
-        Task<IEnumerable<Person>> GetAllPeople();
-        Task<Person>? FindByID(int PersonID);
-        Task<int> AddNew(Person NewPerson);
-        Task<bool> Update(int PersonID, Person Person);
-        Task<bool> Delete(int PersonID);
+        Task<IEnumerable<Person>> GetAllPeopleAsync();
+        Task<Person?> FindByIDAsync(int PersonID);
+        Task<bool> AddNewAsync(Person NewPerson);
+        Task<bool> UpdateAsync(Person Person);
+        Task<bool> DeleteAsync(int PersonID);
     }
 }

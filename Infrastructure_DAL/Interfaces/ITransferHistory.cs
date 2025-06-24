@@ -9,11 +9,11 @@ namespace Infrastructure_DAL.Interfaces
 {
     public interface ITransferHistory
     {
-        Task<IEnumerable<TransferHistory>> GetAllTransferHistories();
-        Task<TransferHistory>? FindByID(int TransferHistoryID);
-        Task<int> AddNew(TransferHistory NewTransferHistory);
-        Task<bool> Update(int TransferHistoryID, TransferHistory TransferHistory);
-        Task<bool> Delete(int TransferHistoryID);
+        Task<IEnumerable<TransferHistory>> GetAllTransferHistoriesAsync();
+        Task<TransferHistory?> FindByIDAsync(int TransferHistoryID);
+        Task<bool> AddNewAsync(TransferHistory NewTransferHistory);
+        Task<bool> UpdateAsync( TransferHistory TransferHistory);
+        Task<bool> DeleteAsync(int TransferHistoryID);
     }
 }
-}
+

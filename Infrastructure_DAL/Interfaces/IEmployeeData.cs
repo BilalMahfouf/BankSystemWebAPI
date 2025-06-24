@@ -9,10 +9,10 @@ namespace Infrastructure_DAL.Interfaces
 {
     public interface IEmployeeData
     {
-        Task<IEnumerable<Employee>> GetAllEmployees();
-        Task<Employee>? FindByID(int EmployeeID);
-        Task<int> AddNew(Employee NewEmployee);
-        Task<bool> Update(int EmployeeID, Employee Employee);
-        Task<bool> Delete(int EmployeeID);
+        Task<IEnumerable<Employee>> GetAllEmployeesAsync();
+        Task<Employee?> FindByIDAsync(int EmployeeID);
+        Task<bool> AddNewAsync(Employee NewEmployee);
+        Task<bool> UpdateAsync(Employee Employee);
+        Task<bool> DeleteAsync(int EmployeeID);
     }
 }

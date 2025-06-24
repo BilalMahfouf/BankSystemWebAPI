@@ -28,4 +28,8 @@ public partial class Client
     public virtual ICollection<TransferHistory> TransferHistoryFromClients { get; set; } = new List<TransferHistory>();
 
     public virtual ICollection<TransferHistory> TransferHistoryToClients { get; set; } = new List<TransferHistory>();
+
+   
+
 }
+

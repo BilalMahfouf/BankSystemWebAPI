@@ -9,10 +9,10 @@ namespace Infrastructure_DAL.Interfaces
 {
     public interface ITransaction
     {
-        Task<IEnumerable<Transaction>> GetAllTransactions();
-        Task<Employee>? FindByID(int TransactionID);
-        Task<int> AddNew(Transaction NewTransaction);
-        Task<bool> Update(int TransactionID, Transaction Transaction);
-        Task<bool> Delete(int TransactionID);
+        Task<IEnumerable<Transaction>> GetAllTransactionsAsync();
+        Task<Employee?> FindByIDAsync(int TransactionID);
+        Task<bool> AddNewAsync(Transaction NewTransaction);
+        Task<bool> UpdateAsync(Transaction Transaction);
+        Task<bool> DeleteAsync(int TransactionID);
     }
 }
