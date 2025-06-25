@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure_DAL.Data
 {
-    public class TransactionData : ITransaction
+    public class TransactionData : ITransactionData
     {
         private readonly BankSystemDbContext _context;
         public TransactionData(BankSystemDbContext context)

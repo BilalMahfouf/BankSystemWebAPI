@@ -7,12 +7,14 @@ using Domain_BLL.DTOs.TransferHistory;
 
 namespace Domain_BLL.Interfaces
 {
+    
+
     public interface ITransferHistoryService
     {
         Task<IEnumerable<ReadTransferHistoryDTO>> GetAllTransferHistoriesAsync();
         Task<ReadTransferHistoryDTO?> GetTransferHistoryByIdAsync(int transferHistoryID);
-        Task<bool> CreateTransferHistoryAsync(CreateTransferHistoryDTO createTransferHistory);
-        Task<bool> UpdateTransferHistoryAsync(UpdateTransferHistoryDTO transferHistory);
+        Task<bool> CreateTransferHistoryAsync(TransferHistoryDTO createTransferHistory);
         Task<bool> DeleteTransferHistoryAsync(int transferHistoryID);
     }
 }
+

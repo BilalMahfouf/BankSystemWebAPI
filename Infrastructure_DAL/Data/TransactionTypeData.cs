@@ -17,7 +17,7 @@ namespace Infrastructure_DAL.Data
             _context = contex;
         }
 
-        public async Task<IEnumerable<TransactionType>> GetAllTransactionTypes()
+        public  async Task<IEnumerable<TransactionType>> GetAllTransactionTypesAsync()
         {
             return await _context.TransactionTypes.ToListAsync();
         }

@@ -25,6 +25,7 @@ public partial class Transaction
 
     public DateTime CreatedAt { get; set; }
 
+    // to fix  remove this field from db and code 25/06/2025 
     public DateTime UpdatedAt { get; set; }
 
     public virtual Client Client { get; set; } = null!;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure_DAL.Interfaces
 {
-    public interface ITransaction
+    public interface ITransactionData
     {
         Task<IEnumerable<Transaction>> GetAllAsync();
         Task<Transaction?> FindByIDAsync(int TransactionID);

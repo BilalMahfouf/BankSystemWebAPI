@@ -16,16 +16,13 @@ namespace Domain_BLL.Mappings
         {
             CreateMap<Person, ReadPersonDTO>();
 
-            CreateMap<UpdatePersonDTO, Person>()
+            CreateMap<PersonDTO, Person>()
                 .ForMember(dest => dest.ID, opt => opt.Ignore())
                 .ForMember(dest => dest.NationalityCountry, opt => opt.Ignore())
                 .ForMember(dest=>dest.CreatedAt,opt=>opt.Ignore())
                 .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
 
-            CreateMap<CreatePersonDTO, Person>()
-                .ForMember(dest => dest.NationalityCountry, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
-                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
+            
         }
     }
 }

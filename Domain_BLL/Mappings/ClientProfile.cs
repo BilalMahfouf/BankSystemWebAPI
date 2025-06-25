@@ -15,13 +15,9 @@ namespace Domain_BLL.Mappings
         {
             CreateMap<Client, ReadClientDTO>();
 
-            CreateMap<UpdateClientDTO,Client>()
+          
+            CreateMap<ClientDTO, Client>()
                 .ForMember(dest => dest.ClientID, opt => opt.Ignore())
-                .ForMember(dest => dest.Person, opt => opt.Ignore())
-                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
-                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
-
-            CreateMap<CreateClientDTO, Client>()
           .ForMember(dest => dest.Person, opt => opt.Ignore())
           .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
           .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());

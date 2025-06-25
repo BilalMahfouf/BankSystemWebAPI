@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain_BLL.DTOs.Person
 {
-    public  class UpdatePersonDTO
+    public  class PersonDTO
     {
 
         public string NationalNo { get; set; } = null!;
@@ -31,7 +31,7 @@ namespace Domain_BLL.DTOs.Person
 
 
 
-        public UpdatePersonDTO( string nationalNo, string firstName, string lastName
+        public PersonDTO( string nationalNo, string firstName, string lastName
             , DateTime dateOfbirth, byte gender, string address, string phone,
             string? email, int nationalityCountryID, string? imagePath)
         {

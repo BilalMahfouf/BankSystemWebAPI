@@ -17,7 +17,7 @@ namespace Infrastructure_DAL.Data
             _context = contex;
         }
 
-        public async Task<IEnumerable<Country>> GetAllCountries()
+        public async Task<IEnumerable<Country>> GetAllCountriesAsync()
         {
             return await _context.Countries.ToListAsync();
         }

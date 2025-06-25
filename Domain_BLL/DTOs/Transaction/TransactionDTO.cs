@@ -6,18 +6,15 @@ using System.Threading.Tasks;
 
 namespace Domain_BLL.DTOs.Transaction
 {
-    public class UpdateTransactionDTO
+    public class TransactionDTO
     {
 
-        public int TransactionTypeID { get; set; }
-
+        
         public int ClientID { get; set; }
 
         public decimal Amount { get; set; }
 
         public DateTime TransactionDate { get; set; }
-
-        public byte TransactionStatus { get; set; }
 
         public string? Notes { get; set; }
 
@@ -29,15 +26,14 @@ namespace Domain_BLL.DTOs.Transaction
 
 
 
-        public UpdateTransactionDTO( int transactionTypeID, int clientID
-            , decimal amount, DateTime transactionDate, byte transactionStatus
+        public TransactionDTO( int clientID
+            , decimal amount, DateTime transactionDate
             , string? notes, int createdByUserID, int? transferID)
         {
-            TransactionTypeID = transactionTypeID;
             ClientID = clientID;
             Amount = amount;
             TransactionDate = transactionDate;
-            TransactionStatus = transactionStatus;
+            
             Notes = notes;
             CreatedByUserID = createdByUserID;
             TransferID = transferID;

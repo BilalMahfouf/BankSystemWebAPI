@@ -16,7 +16,7 @@ namespace Domain_BLL.Mappings
         {
             CreateMap<TransferHistory, ReadTransferHistoryDTO>();
 
-            CreateMap<UpdateTransferHistoryDTO, TransferHistory>()
+            CreateMap<TransferHistoryDTO, TransferHistory>()
                   .ForMember(dest => dest.TransferID, opt => opt.Ignore())
                .ForMember(dest => dest.FromClient, opt => opt.Ignore())
                .ForMember(dest => dest.ToClient, opt => opt.Ignore())
@@ -24,12 +24,7 @@ namespace Domain_BLL.Mappings
                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
 
-            CreateMap<ReadTransferHistoryDTO, TransferHistory>()
-             .ForMember(dest => dest.FromClient, opt => opt.Ignore())
-             .ForMember(dest => dest.ToClient, opt => opt.Ignore())
-               .ForMember(dest => dest.CreatedByUser, opt => opt.Ignore())
-             .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
-             .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
+            
         }
     }
 }

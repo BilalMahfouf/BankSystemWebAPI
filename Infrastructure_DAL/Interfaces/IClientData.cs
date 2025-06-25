@@ -14,5 +14,6 @@ namespace Infrastructure_DAL.Interfaces
         Task<bool> AddNewAsync(Client NewClient);
         Task<bool> UpdateAsync(Client Client);
         Task<bool> DeleteAsync(int ClientID);
+        Task<decimal> GetBalanceAsync(int ClientID);
     }
 }

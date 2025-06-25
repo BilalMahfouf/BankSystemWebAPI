@@ -14,5 +14,7 @@ namespace Infrastructure_DAL.Interfaces
         Task<bool> AddNewAsync(Employee NewEmployee);
         Task<bool> UpdateAsync(Employee Employee);
         Task<bool> DeleteAsync(int EmployeeID);
+
+        Task<bool> isExistByIDAsync(int personID);
     }
 }

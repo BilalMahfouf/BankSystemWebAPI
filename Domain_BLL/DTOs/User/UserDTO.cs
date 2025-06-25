@@ -1,5 +1,4 @@
-﻿using Domain_BLL.DTOs.Employee;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain_BLL.DTOs.User
 {
-    public  class CreateUserDTO
+    public  class UserDTO
     {
-        public int UserID { get; set; }
 
         public int EmployeeID { get; set; }
 
@@ -21,19 +19,18 @@ namespace Domain_BLL.DTOs.User
 
         public bool IsActive { get; set; }
 
-       
-     
 
-        public CreateUserDTO(int userID, int employeeID, string userName, string password
+
+
+        public UserDTO( int employeeID, string userName, string password
             , int permissions, bool isActive)
         {
-            UserID = userID;
             EmployeeID = employeeID;
             UserName = userName;
             Password = password;
             Permissions = permissions;
             IsActive = isActive;
-           
+
         }
     }
 }

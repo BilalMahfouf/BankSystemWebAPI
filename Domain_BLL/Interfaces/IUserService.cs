@@ -11,8 +11,12 @@ namespace Domain_BLL.Interfaces
     {
         Task<IEnumerable<ReadUserDTO>> GetAllUserNamesAsync();
         Task<ReadUserDTO?> FindUserByIDAsync(int userID);
-        Task<bool> CreateUserAsync(CreateUserDTO newUserName);
-        Task<bool> UpdateUserAsync(int userID, UpdateUserDTO updatedUserName);
+        Task<bool> CreateUserAsync(UserDTO newUserName);
+        Task<bool> UpdateUserAsync(int userID, UserDTO updatedUserName);
         Task<bool> DeleteUserAsync(int userID);
+        Task<bool> CanCreateUserAsync(int employeeID);
+        Task<bool> ActivateUser(int userID);
+        Task<bool> DeActivateUser(int userID);
+
     }
 }

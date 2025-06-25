@@ -16,7 +16,7 @@ namespace Domain_BLL.Mappings
         {
             CreateMap<Employee, ReadEmployeeDTO>();
 
-            CreateMap<UpdateEmployeeDTO, Employee>()
+            CreateMap<EmployeeDTO, Employee>()
                .ForMember(dest => dest.EmployeeID, opt => opt.Ignore())
                .ForMember(dest => dest.Person, opt => opt.Ignore())
                 .ForMember(dest => dest.JobTitle, opt => opt.Ignore())
@@ -24,12 +24,7 @@ namespace Domain_BLL.Mappings
                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
 
-            CreateMap<CreateEmployeeDTO, Employee>()
-            .ForMember(dest => dest.Person, opt => opt.Ignore())
-             .ForMember(dest => dest.JobTitle, opt => opt.Ignore())
-              .ForMember(dest => dest.CreatedByUser, opt => opt.Ignore())
-            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
-            .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
+            
         }
     }
 }

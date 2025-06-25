@@ -22,13 +22,16 @@ namespace Domain_BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> CreatePersonAsync(CreatePersonDTO newPerson)
+        public async Task<bool> CreatePersonAsync(PersonDTO newPerson)
         {
             if (newPerson is null)
             {
                 throw new ArgumentNullException(nameof(newPerson), "New person data cannot be null.");
             }
             Person person = _mapper.Map<Person>(newPerson);
+
+            person.CreatedAt = DateTime.Now.ToUniversalTime();
+            person.UpdatedAt = DateTime.Now.ToUniversalTime();
             return await _personData.AddNewAsync(person);
         }
         
@@ -53,13 +56,16 @@ namespace Domain_BLL.Services
             return readPeople;
         }
 
-        public async Task<bool> UpdatePersonAsync(UpdatePersonDTO person)
+        public async Task<bool> UpdatePersonAsync(int personID, PersonDTO person)
         {
             if( person is null)
             {
                 throw new ArgumentNullException(nameof(person));
             }
             Person updatedPerson = _mapper.Map<Person>(person);
+            updatedPerson.ID = personID;
+
+            updatedPerson.UpdatedAt = DateTime.Now.ToUniversalTime();
             return await _personData.UpdateAsync(updatedPerson);
         }
     }

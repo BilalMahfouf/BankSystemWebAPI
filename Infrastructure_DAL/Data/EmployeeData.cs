@@ -59,5 +59,10 @@ namespace Infrastructure_DAL.Data
             _context.Employees.Update(Employee);
             return await _context.SaveChangesAsync() > 0;
         }
+
+        public async Task<bool> isExistByIDAsync(int personID)
+        {
+            return await _context.Employees.AnyAsync(e => e.PersonID == personID);
+        }
     }
 }

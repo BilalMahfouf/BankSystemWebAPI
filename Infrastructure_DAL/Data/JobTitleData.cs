@@ -17,7 +17,7 @@ namespace Infrastructure_DAL.Data
         _context=contex;
         }
 
-        public async Task<IEnumerable<JobTitle>> GetAllJobTitles()
+        public async Task<IEnumerable<JobTitle>> GetAllJobTitlesAsync()
         {
             return await _context.JobTitles.ToListAsync();
         }

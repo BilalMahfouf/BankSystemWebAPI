@@ -1,4 +1,6 @@
 ﻿using Domain_BLL.DTOs.Client;
+using Domain_BLL.DTOs.Transaction;
+using Domain_BLL.DTOs.TransferHistory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +13,14 @@ namespace Domain_BLL.Interfaces
     {
         Task<IEnumerable<ReadClientDTO>> GetAllClientsAsync();
         Task<ReadClientDTO?> FindClientByIDAsync(int ClientID);
-        Task<bool> CreateClientAsync(CreateClientDTO NewClient);
-        Task<bool> UpdateClientAsync(UpdateClientDTO Client);
+        Task<bool> CreateClientAsync(ClientDTO NewClient);
+        Task<bool> UpdateClientAsync(int clientID,ClientDTO Client);
         Task<bool> DeleteClientAsync(int ClientID);
+        Task<bool> ActivateClient(int clientID);
+        Task<bool> DeActivateClient(int clientID);
+
+        Task<bool> CanWithdraw(int clientID, decimal amount);
+        
+
     }
 }

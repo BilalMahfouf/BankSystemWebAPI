@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain_BLL.DTOs.Person;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain_BLL.DTOs.Client
 {
-    public class UpdateClientDTO
+    public class ClientDTO
     {
-
-       
 
         public int PersonID { get; set; }
 
@@ -21,18 +20,17 @@ namespace Domain_BLL.DTOs.Client
 
         public bool IsActive { get; set; }
 
+       
 
-
-        public UpdateClientDTO( int personID, string accountNumber
+        public ClientDTO(int clientID, int personID, string accountNumber
             , string pinCode, decimal balance, bool isActive)
         {
-           
             PersonID = personID;
             AccountNumber = accountNumber;
             PinCode = pinCode;
             Balance = balance;
             IsActive = isActive;
-
+           
         }
     }
 }

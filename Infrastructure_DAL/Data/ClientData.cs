@@ -63,5 +63,11 @@ namespace Infrastructure_DAL.Data
 
         }
 
+        public async Task<decimal> GetBalanceAsync(int ClientID)
+        {
+            return await _context.Clients.Where(c=>c.ClientID==ClientID).Select(c => c.Balance).FirstOrDefaultAsync();
+                
+        }
+
     }
 }

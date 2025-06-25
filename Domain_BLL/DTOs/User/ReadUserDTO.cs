@@ -15,7 +15,7 @@ namespace Domain_BLL.DTOs.User
 
         public string UserName { get; set; } = null!;
 
-        public string Password { get; set; } = null!;
+       
 
         public int Permissions { get; set; }
 
@@ -27,14 +27,14 @@ namespace Domain_BLL.DTOs.User
 
        public ReadEmployeeDTO Employee { get; set; }
 
-        public ReadUserDTO(int userID, int employeeID, string userName, string password
+        public ReadUserDTO(int userID, int employeeID, string userName
             , int permissions, bool isActive, DateTime createdAt, DateTime updatedAt
             , ReadEmployeeDTO employee)
         {
             UserID = userID;
             EmployeeID = employeeID;
             UserName = userName;
-            Password = password;
+           
             Permissions = permissions;
             IsActive = isActive;
             CreatedAt = createdAt;
