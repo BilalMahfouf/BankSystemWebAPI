@@ -21,14 +21,10 @@ namespace Domain_BLL.DTOs.Client
 
         public bool IsActive { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
-
+       
 
         public CreateClientDTO(int clientID, int personID, string accountNumber
-            , string pinCode, decimal balance, bool isActive, DateTime createdAt
-            , DateTime updatedAt)
+            , string pinCode, decimal balance, bool isActive)
         {
             ClientID = clientID;
             PersonID = personID;
@@ -36,8 +32,7 @@ namespace Domain_BLL.DTOs.Client
             PinCode = pinCode;
             Balance = balance;
             IsActive = isActive;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+           
         }
     }
 }

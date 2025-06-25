@@ -18,24 +18,20 @@ namespace Domain_BLL.DTOs.TransferHistory
 
         public DateTime TransferDate { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
+        
 
         public int CreatedByUserID { get; set; }
 
        
 
         public CreateTransferHistoryDTO(int transferID, int fromClientID, int toClientID
-            , DateTime transferDate, DateTime createdAt, DateTime updatedAt
-            , int createdByUserID)
+            , DateTime transferDate, int createdByUserID)
         {
             TransferID = transferID;
             FromClientID = fromClientID;
             ToClientID = toClientID;
             TransferDate = transferDate;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            
             CreatedByUserID = createdByUserID;
         }
     }

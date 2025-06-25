@@ -8,30 +8,26 @@ namespace Domain_BLL.DTOs.TransferHistory
 {
     public class UpdateTransferHistoryDTO
     {
-        public int? FromClientID { get; set; }
 
-        public int? ToClientID { get; set; }
+        public int FromClientID { get; set; }
 
-        public DateTime? TransferDate { get; set; }
+        public int ToClientID { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
-
-        public int? CreatedByUserID { get; set; }
+        public DateTime TransferDate { get; set; }
 
 
 
-        public UpdateTransferHistoryDTO( int? fromClientID, int? toClientID
-            , DateTime? transferDate, DateTime? createdAt, DateTime? updatedAt
-            , int? createdByUserID)
+        public int CreatedByUserID { get; set; }
+
+
+
+        public UpdateTransferHistoryDTO( int fromClientID, int toClientID
+            , DateTime transferDate, int createdByUserID)
         {
-           
             FromClientID = fromClientID;
             ToClientID = toClientID;
             TransferDate = transferDate;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+
             CreatedByUserID = createdByUserID;
         }
     }

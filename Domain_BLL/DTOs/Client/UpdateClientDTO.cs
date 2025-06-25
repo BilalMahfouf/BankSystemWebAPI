@@ -9,31 +9,30 @@ namespace Domain_BLL.DTOs.Client
     public class UpdateClientDTO
     {
 
-        public int? PersonID { get; set; }
+       
 
-        public string? AccountNumber { get; set; } = null!;
+        public int PersonID { get; set; }
 
-        public string? PinCode { get; set; } = null!;
+        public string AccountNumber { get; set; } = null!;
 
-        public decimal? Balance { get; set; }
+        public string PinCode { get; set; } = null!;
 
-        public bool? IsActive { get; set; }
+        public decimal Balance { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
-
-        public DateTime? UpdatedAt { get; set; }
+        public bool IsActive { get; set; }
 
 
-        public UpdateClientDTO(int? personID, string? accountNumber, string? pinCode
-            , decimal? balance, bool? isActive, DateTime? createdAt, DateTime? updatedAt)
+
+        public UpdateClientDTO( int personID, string accountNumber
+            , string pinCode, decimal balance, bool isActive)
         {
+           
             PersonID = personID;
             AccountNumber = accountNumber;
             PinCode = pinCode;
             Balance = balance;
             IsActive = isActive;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+
         }
     }
 }

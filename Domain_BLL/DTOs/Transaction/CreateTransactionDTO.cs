@@ -30,16 +30,13 @@ namespace Domain_BLL.DTOs.Transaction
 
         public int? TransferID { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
+       
 
        
 
         public CreateTransactionDTO(int transactionID, int transactionTypeID, int clientID
             , decimal amount, DateTime transactionDate, byte transactionStatus
-            , string? notes, int createdByUserID, int? transferID, DateTime createdAt
-            , DateTime updatedAt)
+            , string? notes, int createdByUserID, int? transferID)
         {
             TransactionID = transactionID;
             TransactionTypeID = transactionTypeID;
@@ -50,8 +47,7 @@ namespace Domain_BLL.DTOs.Transaction
             Notes = notes;
             CreatedByUserID = createdByUserID;
             TransferID = transferID;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+           
         }
     }
 }

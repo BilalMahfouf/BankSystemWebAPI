@@ -8,32 +8,29 @@ namespace Domain_BLL.DTOs.User
 {
     public  class UpdateUserDTO
     {
-        public int? EmployeeID { get; set; }
 
-        public string? UserName { get; set; } 
+        public int EmployeeID { get; set; }
 
-        public string? Password { get; set; } 
+        public string UserName { get; set; } = null!;
 
-        public int? Permissions { get; set; }
+        public string Password { get; set; } = null!;
 
-        public bool? IsActive { get; set; }
+        public int Permissions { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
+        public bool IsActive { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
 
 
 
         public UpdateUserDTO( int employeeID, string userName, string password
-            , int permissions, bool isActive, DateTime createdAt, DateTime updatedAt)
+            , int permissions, bool isActive)
         {
             EmployeeID = employeeID;
             UserName = userName;
             Password = password;
             Permissions = permissions;
             IsActive = isActive;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+
         }
     }
 }

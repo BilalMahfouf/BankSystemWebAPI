@@ -21,14 +21,11 @@ namespace Domain_BLL.DTOs.User
 
         public bool IsActive { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
-
+       
      
 
         public CreateUserDTO(int userID, int employeeID, string userName, string password
-            , int permissions, bool isActive, DateTime createdAt, DateTime updatedAt)
+            , int permissions, bool isActive)
         {
             UserID = userID;
             EmployeeID = employeeID;
@@ -36,8 +33,7 @@ namespace Domain_BLL.DTOs.User
             Password = password;
             Permissions = permissions;
             IsActive = isActive;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+           
         }
     }
 }

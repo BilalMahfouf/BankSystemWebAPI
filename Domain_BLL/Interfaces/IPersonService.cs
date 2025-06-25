@@ -9,7 +9,7 @@ namespace Domain_BLL.Interfaces
 {
     public  interface IPersonService
     {
-        Task<IEnumerable<ReadPersonDTO?>> GetAllPeopleAsync();
+        Task<IEnumerable<ReadPersonDTO>> GetAllPeopleAsync();
         Task<ReadPersonDTO?> FindPersonByIDAsync(int personID);
         Task<bool> CreatePersonAsync(CreatePersonDTO newPerson);
         Task<bool> UpdatePersonAsync(UpdatePersonDTO person);

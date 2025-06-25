@@ -30,14 +30,11 @@ namespace Domain_BLL.DTOs.Person
 
         public string? ImagePath { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
+       
 
         public CreatePersonDTO(int iD, string nationalNo, string firstName, string lastName
             , DateTime dateOfbirth, byte gender, string address, string phone,
-            string? email, int nationalityCountryID, string? imagePath, DateTime createdAt
-            , DateTime updatedAt)
+            string? email, int nationalityCountryID, string? imagePath)
         {
             ID = iD;
             NationalNo = nationalNo;
@@ -50,8 +47,7 @@ namespace Domain_BLL.DTOs.Person
             Email = email;
             NationalityCountryID = nationalityCountryID;
             ImagePath = imagePath;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+            
         }
     }
 }

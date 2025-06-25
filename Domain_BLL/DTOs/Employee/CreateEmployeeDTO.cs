@@ -19,21 +19,19 @@ namespace Domain_BLL.DTOs.Employee
 
         public DateTime HireDate { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
+       
 
         public int CreatedByUserID { get; set; }
 
-       public CreateEmployeeDTO(int employeeID, int personID, int jobTitleID, decimal salary, DateTime hireDate, DateTime createdAt, DateTime updatedAt, int createdByUserID)
+       public CreateEmployeeDTO(int employeeID, int personID, int jobTitleID, decimal salary
+           , DateTime hireDate, int createdByUserID)
         {
             EmployeeID = employeeID;
             PersonID = personID;
             JobTitleID = jobTitleID;
             Salary = salary;
             HireDate = hireDate;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+           
             CreatedByUserID = createdByUserID;
         }
     }

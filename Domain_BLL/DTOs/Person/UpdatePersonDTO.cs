@@ -8,35 +8,32 @@ namespace Domain_BLL.DTOs.Person
 {
     public  class UpdatePersonDTO
     {
-        public string? NationalNo { get; set; } = null!;
 
-        public string? FirstName { get; set; } = null!;
+        public string NationalNo { get; set; } = null!;
 
-        public string? LastName { get; set; } = null!;
+        public string FirstName { get; set; } = null!;
 
-        public DateTime? DateOfbirth { get; set; }
+        public string LastName { get; set; } = null!;
 
-        public byte? Gender { get; set; }
+        public DateTime DateOfbirth { get; set; }
 
-        public  string? Address { get; set; } = null!;
-                
-        public string?  Phone { get; set; } = null!;
+        public byte Gender { get; set; }
+
+        public string Address { get; set; } = null!;
+
+        public string Phone { get; set; } = null!;
 
         public string? Email { get; set; }
 
-        public int? NationalityCountryID { get; set; }
+        public int NationalityCountryID { get; set; }
 
         public string? ImagePath { get; set; }
 
-        public DateTime? CreatedAt { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
-        
 
-        public UpdatePersonDTO(
-            string? nationalNo,string? firstName,string? lastName,DateTime? dateOfbirth
-            ,byte? gender,string? address,string? phone,string? email,int? nationalityCountryID
-            ,string? imagePath,DateTime? createdAt,DateTime? updatedAt)
+        public UpdatePersonDTO( string nationalNo, string firstName, string lastName
+            , DateTime dateOfbirth, byte gender, string address, string phone,
+            string? email, int nationalityCountryID, string? imagePath)
         {
             NationalNo = nationalNo;
             FirstName = firstName;
@@ -48,8 +45,8 @@ namespace Domain_BLL.DTOs.Person
             Email = email;
             NationalityCountryID = nationalityCountryID;
             ImagePath = imagePath;
-            CreatedAt = createdAt;
-            UpdatedAt = updatedAt;
+
         }
+
     }
 }
