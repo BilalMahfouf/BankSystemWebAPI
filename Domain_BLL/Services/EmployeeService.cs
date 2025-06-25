@@ -64,14 +64,14 @@ namespace Domain_BLL.Services
             return readEmployees;
         }
 
-        public async Task<bool> UpdateEmployeeAsync(EmployeeDTO Employee)
+        public async Task<bool> UpdateEmployeeAsync(int employeeID,EmployeeDTO Employee)
         {
             if (Employee == null) 
             { 
                 throw new ArgumentNullException(nameof(Employee)); 
             }
             Employee employee = _mapper.Map<Employee>(Employee);
-
+            employee.EmployeeID = employeeID;
             employee.UpdatedAt = DateTime.Now.ToUniversalTime();
             return await _employeeData.UpdateAsync(employee);
         }
