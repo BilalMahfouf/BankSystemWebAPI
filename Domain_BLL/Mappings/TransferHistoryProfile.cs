@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Domain_BLL.DTOs.Client;
 using Domain_BLL.DTOs.Transaction;
 using Domain_BLL.DTOs.TransferHistory;
+using Domain_BLL.DTOs.User;
 using Infrastructure_DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,9 @@ namespace Domain_BLL.Mappings
         public TransferHistoryProfile()
         {
             CreateMap<TransferHistory, ReadTransferHistoryDTO>();
+            CreateMap<Client, ReadClientDTO>();
+            CreateMap<User, ReadUserDTO>();
+
 
             CreateMap<TransferHistoryDTO, TransferHistory>()
                   .ForMember(dest => dest.TransferID, opt => opt.Ignore())

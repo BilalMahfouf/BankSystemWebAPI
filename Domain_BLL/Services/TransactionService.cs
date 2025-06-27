@@ -132,7 +132,7 @@ namespace Domain_BLL.Services
 
             // if the deposit is failed we create a transaction with with failed status
             bool TransactionStatus = await _clientService.UpdateClientBalanceAsync
-                (transaction.ClientID, transaction.Amount);
+                (transaction.ClientID,(-1)*(transaction.Amount));
             // 1 = success, 0 = failure
             withdraw.TransactionStatus = (byte)(TransactionStatus ? 1 : 0);
             withdraw.TransactionTypeID = Convert.ToInt32(enTransactionType.eWithdraw);

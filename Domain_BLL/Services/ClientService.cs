@@ -109,7 +109,7 @@ namespace Domain_BLL.Services
             // this check the balance if we want to withdraw
             if(amount<0)
             {
-                if (!(await CanWithdrawAsync(clientID, -amount))) return false;
+                if (!(await CanWithdrawAsync(clientID, (-1) * amount))) return false;
             }
             
 
