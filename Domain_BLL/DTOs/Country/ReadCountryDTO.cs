@@ -17,5 +17,6 @@ namespace Domain_BLL.DTOs.Country
             this.ID = ID;
             this.Name = Name;
         }
+        public ReadCountryDTO() { }
     }
 }

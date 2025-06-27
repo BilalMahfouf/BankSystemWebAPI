@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Domain_BLL.DTOs.Client;
+using Domain_BLL.DTOs.Country;
+using Domain_BLL.DTOs.Person;
 using Infrastructure_DAL.Models;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,8 @@ namespace Domain_BLL.Mappings
         public ClientProfile()
         {
             CreateMap<Client, ReadClientDTO>();
-
+            CreateMap<Person, ReadPersonDTO>();
+            CreateMap<Country, ReadCountryDTO>();
           
             CreateMap<ClientDTO, Client>()
                 .ForMember(dest => dest.ClientID, opt => opt.Ignore())

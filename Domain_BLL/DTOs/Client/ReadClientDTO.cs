@@ -39,5 +39,7 @@ namespace Domain_BLL.DTOs.Client
             UpdatedAt = updatedAt;
             Person = person;
         }
+    
+    public ReadClientDTO() { }
     }
 }

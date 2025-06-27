@@ -13,8 +13,8 @@ namespace Infrastructure_DAL.Data
 
     public class ClientData : IClientData
     {
-        private readonly BankSystemDbContext _context;
-        public ClientData(BankSystemDbContext context)
+        private readonly BankSystemDb3Context _context;
+        public ClientData(BankSystemDb3Context context)
         {
             _context = context;
         }
@@ -46,9 +46,9 @@ namespace Infrastructure_DAL.Data
                 .FirstOrDefaultAsync(c => c.ClientID == ClientID);
         }
 
-        public async Task<IEnumerable<Client>> GetAllCAsync()
+        public async Task<IEnumerable<Client>> GetAllAsync()
         {
-            return await _context.Clients.ToListAsync();
+            return await _context.Clients.Include(c=>c.Person).ToListAsync();
         }
 
         public async Task<bool> UpdateAsync(Client Client)

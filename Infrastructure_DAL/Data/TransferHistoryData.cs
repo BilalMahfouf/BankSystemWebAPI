@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace Infrastructure_DAL.Data
 {
-    class TransferHistoryData : ITransferHistory
+   public class TransferHistoryData : ITransferHistory
     {
-        private readonly BankSystemDbContext _context;
-        public TransferHistoryData(BankSystemDbContext context) 
+        private readonly BankSystemDb3Context _context;
+        public TransferHistoryData(BankSystemDb3Context context) 
         {
             _context = context;
         }
 
-        public async Task<bool> AddNewAsync(TransferHistory NewTransferHistory)
+        public async Task<int> AddNewAsync(TransferHistory NewTransferHistory)
         {
 
             if (NewTransferHistory is null)
@@ -27,7 +27,8 @@ namespace Infrastructure_DAL.Data
             }
 
             await _context.TransferHistories.AddAsync(NewTransferHistory);
-            return await _context.SaveChangesAsync() > 0;
+            await _context.SaveChangesAsync();
+            return NewTransferHistory.TransferID;
         }
 
         public async Task<bool> DeleteAsync(int TransferHistoryID)

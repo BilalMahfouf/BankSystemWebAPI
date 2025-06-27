@@ -22,7 +22,7 @@ namespace Domain_BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> ActivateClient(int clientID)
+        public async Task<bool> ActivateClientAsync(int clientID)
         {
             Client? client = await _clientData.FindByIDAsync(clientID);
             if (client is null) return false;
@@ -31,7 +31,7 @@ namespace Domain_BLL.Services
             client.UpdatedAt = DateTime.Now.ToUniversalTime();
             return await  _clientData.UpdateAsync(client);
         }
-        public async Task<bool> DeActivateClient(int clientID)
+        public async Task<bool> DeActivateClientAsync(int clientID)
         {
             Client? client = await _clientData.FindByIDAsync(clientID);
             if (client is null) return false;
@@ -67,9 +67,9 @@ namespace Domain_BLL.Services
 
         public async Task<IEnumerable<ReadClientDTO>> GetAllClientsAsync()
         {
-            IEnumerable<Client> clients = await _clientData.GetAllCAsync();
-            IEnumerable<ReadClientDTO> readClients = _mapper
-                .Map<IEnumerable<ReadClientDTO>>(clients);
+            IEnumerable<Client> clients = await _clientData.GetAllAsync();
+            IEnumerable<ReadClientDTO> readClients =
+                _mapper.Map<IEnumerable<ReadClientDTO>>(clients);
             return readClients;
         }
 
@@ -79,16 +79,43 @@ namespace Domain_BLL.Services
             {
                 throw new ArgumentNullException(nameof(Client));
             }
-            Client client= _mapper.Map<Client>(Client);
-            client.ClientID= clientID;
+            var updatedClient = await _clientData.FindByIDAsync(clientID);
+            if (updatedClient is null)
+            {
+                return false;
+            }
 
-            client.UpdatedAt = DateTime.UtcNow.ToUniversalTime();
-            return await _clientData.UpdateAsync(client);
+            _mapper.Map(Client, updatedClient);
+            updatedClient.ClientID= clientID;
+
+            updatedClient.UpdatedAt = DateTime.UtcNow.ToUniversalTime();
+            return await _clientData.UpdateAsync(updatedClient);
         }
 
-        public async Task<bool> CanWithdraw(int clientID,decimal amount)
+        public async Task<bool> CanWithdrawAsync(int clientID,decimal amount)
         {
             return await _clientData.GetBalanceAsync(clientID) >= amount;
+        }
+
+        public async Task<bool> UpdateClientBalanceAsync(int clientID, decimal amount)
+        {
+            if(clientID < 0)
+            {
+                throw new ArgumentNullException(nameof(clientID));
+            }
+            var Client = await _clientData.FindByIDAsync(clientID);
+            if (Client is null) return false;
+
+            // this check the balance if we want to withdraw
+            if(amount<0)
+            {
+                if (!(await CanWithdrawAsync(clientID, -amount))) return false;
+            }
+            
+
+            Client.Balance += amount;
+            Client.UpdatedAt = DateTime.UtcNow.ToUniversalTime();
+            return await _clientData.UpdateAsync(Client);
         }
 
     }

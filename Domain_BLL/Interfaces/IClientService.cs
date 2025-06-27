@@ -16,10 +16,10 @@ namespace Domain_BLL.Interfaces
         Task<bool> CreateClientAsync(ClientDTO NewClient);
         Task<bool> UpdateClientAsync(int clientID,ClientDTO Client);
         Task<bool> DeleteClientAsync(int ClientID);
-        Task<bool> ActivateClient(int clientID);
-        Task<bool> DeActivateClient(int clientID);
-
-        Task<bool> CanWithdraw(int clientID, decimal amount);
+        Task<bool> ActivateClientAsync(int clientID);
+        Task<bool> DeActivateClientAsync(int clientID);
+        Task<bool> CanWithdrawAsync(int clientID, decimal amount);
+        Task<bool> UpdateClientBalanceAsync(int clientID, decimal amount);
         
 
     }

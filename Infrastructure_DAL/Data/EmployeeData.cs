@@ -12,8 +12,8 @@ namespace Infrastructure_DAL.Data
 {
     public class EmployeeData : IEmployeeData
     {
-        private readonly BankSystemDbContext _context;
-        public EmployeeData(BankSystemDbContext context)
+        private readonly BankSystemDb3Context _context;
+        public EmployeeData(BankSystemDb3Context context)
         {
             _context = context;
         }
@@ -46,7 +46,8 @@ namespace Infrastructure_DAL.Data
 
         public async Task<IEnumerable<Employee>> GetAllAsync()
         {
-            return await _context.Employees.ToListAsync();
+            return await _context.Employees.Include(e => e.Person).Include(e => e.JobTitle)
+                .Include(e => e.CreatedByUser).ToListAsync();
         }
 
         public async Task<bool> UpdateAsync(Employee Employee)

@@ -11,8 +11,8 @@ namespace Infrastructure_DAL.Data
 {
     public  class CountryData
     {
-        private readonly BankSystemDbContext _context;
-        public CountryData(BankSystemDbContext contex)
+        private readonly BankSystemDb3Context _context;
+        public CountryData(BankSystemDb3Context contex)
         {
             _context = contex;
         }

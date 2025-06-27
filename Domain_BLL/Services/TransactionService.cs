@@ -45,13 +45,21 @@ namespace Domain_BLL.Services
                 throw new ArgumentNullException(nameof(transaction));
             }
             Transaction deposit = _mapper.Map<Transaction>(transaction);
-            // 1 is accepted
-            deposit.TransactionStatus = 1;
+
+            // if the deposit is failed we create a transaction with with status failed
+            bool TransactionStatus = await _clientService.UpdateClientBalanceAsync
+                (transaction.ClientID, transaction.Amount);
+            // 1 = success, 0 = failure
+            deposit.TransactionStatus = (byte)(TransactionStatus ? 1 : 0); 
             deposit.TransactionTypeID = Convert.ToInt32(enTransactionType.eDeposit);
             deposit.CreatedAt = DateTime.UtcNow;
             deposit.UpdatedAt= DateTime.UtcNow;
 
-            return await  _transactionData.AddNewAsync(deposit);
+            if (await _transactionData.AddNewAsync(deposit))
+            {
+                return deposit.TransactionStatus == 1 ? true : false;
+            }
+            return false;
         }
 
         public async Task<IEnumerable<ReadTransactionDTO>> GetAllTransactionsAsync()
@@ -81,6 +89,7 @@ namespace Domain_BLL.Services
             {
                 throw new ArgumentNullException(nameof(transferRequest));
             }
+
             // 1. Withdraw from source
             TransactionDTO withdrawDTO = new(transferRequest.FromClientID, transferRequest.Amount
                 , transferRequest.TransferDate, transferRequest.Notes, transferRequest.CreatedByUserID, null);
@@ -98,7 +107,17 @@ namespace Domain_BLL.Services
             TransferHistoryDTO transferHistory = new TransferHistoryDTO
                 (transferRequest.FromClientID, transferRequest.ToClientID
                 , transferRequest.TransferDate, transferRequest.CreatedByUserID);
-            return await _transferHistoryService.CreateTransferHistoryAsync(transferHistory);
+            int TransferID = await _transferHistoryService.CreateTransferHistoryAsync
+                (transferHistory);
+            // 4. Create new Transaction with type Transfer
+            byte TransferStatus = (byte)(TransferID > 0 ? 1 : 0);
+            Transaction TransferTransaction = new Transaction(0, (int)enTransactionType.eTransfer
+                , transferRequest.FromClientID, transferRequest.Amount, transferRequest.TransferDate
+                , TransferStatus, transferRequest.Notes, transferRequest.CreatedByUserID, TransferID
+                , DateTime.UtcNow, DateTime.UtcNow);
+            TransferTransaction.TransferID = TransferID > 0 ? TransferID : null;
+            return await _transactionData.AddNewAsync(TransferTransaction);
+
         }
 
         public async Task<bool> Withdraw(TransactionDTO transaction)
@@ -107,19 +126,24 @@ namespace Domain_BLL.Services
             {
                 throw new ArgumentNullException(nameof(transaction));
             }
-            if (!(await _clientService.CanWithdraw(transaction.ClientID, transaction.Amount)))
-            {
-                return false;
-            }
+           
             
             Transaction withdraw = _mapper.Map<Transaction>(transaction);
-            // 1 is accepted
-            withdraw.TransactionStatus = 1;
+
+            // if the deposit is failed we create a transaction with with failed status
+            bool TransactionStatus = await _clientService.UpdateClientBalanceAsync
+                (transaction.ClientID, transaction.Amount);
+            // 1 = success, 0 = failure
+            withdraw.TransactionStatus = (byte)(TransactionStatus ? 1 : 0);
             withdraw.TransactionTypeID = Convert.ToInt32(enTransactionType.eWithdraw);
             withdraw.CreatedAt = DateTime.UtcNow;
             withdraw.UpdatedAt = DateTime.UtcNow;
 
-            return await _transactionData.AddNewAsync(withdraw);
+            if (await _transactionData.AddNewAsync(withdraw))
+            {
+                return withdraw.TransactionStatus == 1 ? true : false;
+            }
+            return false;
         }
     }
 

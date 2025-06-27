@@ -25,7 +25,6 @@ public partial class Transaction
 
     public DateTime CreatedAt { get; set; }
 
-    // to fix  remove this field from db and code 25/06/2025 
     public DateTime UpdatedAt { get; set; }
 
     public virtual Client Client { get; set; } = null!;
@@ -35,4 +34,22 @@ public partial class Transaction
     public virtual TransactionType TransactionType { get; set; } = null!;
 
     public virtual TransferHistory? Transfer { get; set; }
+
+    public Transaction() { }
+    public Transaction(int transactionID, int transactionTypeID, int clientID, decimal amount
+        , DateTime transactionDate, byte transactionStatus, string? notes
+        , int createdByUserID, int? transferID, DateTime createdAt, DateTime updatedAt)
+    {
+        TransactionID = transactionID;
+        TransactionTypeID = transactionTypeID;
+        ClientID = clientID;
+        Amount = amount;
+        TransactionDate = transactionDate;
+        TransactionStatus = transactionStatus;
+        Notes = notes;
+        CreatedByUserID = createdByUserID;
+        TransferID = transferID;
+        CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
+    }
 }

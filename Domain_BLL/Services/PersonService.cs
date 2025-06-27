@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain_BLL.DTOs.Person;
 using Domain_BLL.Interfaces;
+using Infrastructure_DAL.Data;
 using Infrastructure_DAL.Interfaces;
 using Infrastructure_DAL.Models;
 using System;
@@ -62,11 +63,18 @@ namespace Domain_BLL.Services
             {
                 throw new ArgumentNullException(nameof(person));
             }
-            Person updatedPerson = _mapper.Map<Person>(person);
-            updatedPerson.ID = personID;
+            // ✅ Step 1: Get the existing tracked entity
+            var existingPerson = await _personData.FindByIDAsync(personID);
+            if (existingPerson is null) return false;
 
-            updatedPerson.UpdatedAt = DateTime.Now.ToUniversalTime();
-            return await _personData.UpdateAsync(updatedPerson);
+            // ✅ Step 2: Apply changes to the tracked instance (in-place)
+            _mapper.Map(person, existingPerson);
+
+            // ✅ Step 3: Update timestamp
+            existingPerson.UpdatedAt = DateTime.UtcNow;
+
+            // ✅ Step 4: Save — no need for .Update()
+            return await _personData.UpdateAsync(existingPerson);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Domain_BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> CreateTransferHistoryAsync(TransferHistoryDTO createTransferHistory)
+        public async Task<int> CreateTransferHistoryAsync(TransferHistoryDTO createTransferHistory)
         {
             if(createTransferHistory is null)
             {

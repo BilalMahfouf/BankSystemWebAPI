@@ -25,15 +25,15 @@ namespace Domain_BLL.DTOs.Employee
 
         public DateTime UpdatedAt { get; set; }
 
-        public int CreatedByUserID { get; set; }
+        public int? CreatedByUserID { get; set; }
 
         public ReadPersonDTO Person { get; set; }
         public ReadJobTitleDTO JobTitle { get; set; }
-        public ReadUserDTO CreatedByUser { get; set; }
+        public ReadUserDTO? CreatedByUser { get; set; }
 
         public ReadEmployeeDTO(int employeeID, int personID, int jobTitleID, decimal salary
-            , DateTime hireDate, DateTime createdAt, DateTime updatedAt, int createdByUserID
-            ,ReadPersonDTO person,ReadJobTitleDTO jobTitle,ReadUserDTO createdByUser)
+            , DateTime hireDate, DateTime createdAt, DateTime updatedAt, int?createdByUserID
+            ,ReadPersonDTO person,ReadJobTitleDTO jobTitle,ReadUserDTO? createdByUser)
         {
             EmployeeID = employeeID;
             PersonID = personID;

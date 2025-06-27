@@ -35,7 +35,7 @@ namespace Domain_BLL.DTOs.Person
 
         public DateTime UpdatedAt { get; set; }
 
-        public ReadCountryDTO NationalityCountry { get; set; }
+        public ReadCountryDTO NationalityCountry { get; set; }=null!;
 
         public ReadPersonDTO(int iD, string nationalNo, string firstName, string lastName
             , DateTime dateOfbirth, byte gender, string address, string phone,
@@ -57,5 +57,7 @@ namespace Domain_BLL.DTOs.Person
             UpdatedAt = updatedAt;
             NationalityCountry = readCountryDTO;
         }
+
+        public ReadPersonDTO() { }
     }
 }

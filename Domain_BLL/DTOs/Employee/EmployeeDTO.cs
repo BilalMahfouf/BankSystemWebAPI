@@ -20,10 +20,10 @@ namespace Domain_BLL.DTOs.Employee
 
 
 
-        public int CreatedByUserID { get; set; }
+        public int? CreatedByUserID { get; set; }
 
         public EmployeeDTO( int personID, int jobTitleID, decimal salary
-            , DateTime hireDate, int createdByUserID)
+            , DateTime hireDate, int? createdByUserID)
         {
             PersonID = personID;
             JobTitleID = jobTitleID;
@@ -32,6 +32,7 @@ namespace Domain_BLL.DTOs.Employee
 
             CreatedByUserID = createdByUserID;
         }
+        public EmployeeDTO() { }
 
     }
 }

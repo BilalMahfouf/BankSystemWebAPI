@@ -22,7 +22,7 @@ namespace Domain_BLL.DTOs.Client
 
        
 
-        public ClientDTO(int clientID, int personID, string accountNumber
+        public ClientDTO( int personID, string accountNumber
             , string pinCode, decimal balance, bool isActive)
         {
             PersonID = personID;

@@ -19,9 +19,9 @@ public partial class Employee
 
     public DateTime UpdatedAt { get; set; }
 
-    public int CreatedByUserID { get; set; }
+    public int? CreatedByUserID { get; set; }
 
-    public virtual User? CreatedByUser { get; set; } = null!;
+    public virtual User? CreatedByUser { get; set; }
 
     public virtual JobTitle JobTitle { get; set; } = null!;
 

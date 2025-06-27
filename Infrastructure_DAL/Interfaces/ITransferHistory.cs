@@ -11,7 +11,7 @@ namespace Infrastructure_DAL.Interfaces
     {
         Task<IEnumerable<TransferHistory>> GetAllAsync();
         Task<TransferHistory?> FindByIDAsync(int TransferHistoryID);
-        Task<bool> AddNewAsync(TransferHistory NewTransferHistory);
+        Task<int> AddNewAsync(TransferHistory NewTransferHistory);
         Task<bool> UpdateAsync( TransferHistory TransferHistory);
         Task<bool> DeleteAsync(int TransferHistoryID);
     }

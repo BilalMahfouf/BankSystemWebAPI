@@ -11,8 +11,8 @@ namespace Infrastructure_DAL.Data
 {
     public  class TransactionTypeData
     {
-        private readonly BankSystemDbContext _context;
-        public TransactionTypeData(BankSystemDbContext contex)
+        private readonly BankSystemDb3Context _context;
+        public TransactionTypeData(BankSystemDb3Context contex)
         {
             _context = contex;
         }

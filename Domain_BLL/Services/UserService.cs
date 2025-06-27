@@ -101,16 +101,19 @@ namespace Domain_BLL.Services
             return readUsers;
         }
 
-        public async Task<bool> UpdateUserAsync(int userID, UserDTO updatedUserName)
+        public async Task<bool> UpdateUserAsync(int userID, UserDTO userdto)
         {
            if(userID < 0)
             {
                 throw new ArgumentException(nameof(userID));
             }
-            var user = _mapper.Map<User>(updatedUserName);
-            user.UserID = userID;
-            user.UpdatedAt = DateTime.UtcNow;
-            return await _userData.UpdateAsync(user);
+            var updatedUser = await _userData.FindByIDAsync(userID);
+            if (updatedUser is null) return false;
+
+            _mapper.Map(userdto, updatedUser);
+            updatedUser.UserID = userID;
+            updatedUser.UpdatedAt = DateTime.UtcNow;
+            return await _userData.UpdateAsync(updatedUser);
         }
     }
 }

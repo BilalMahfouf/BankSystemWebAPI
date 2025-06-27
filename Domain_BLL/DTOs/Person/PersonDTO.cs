@@ -47,6 +47,6 @@ namespace Domain_BLL.DTOs.Person
             ImagePath = imagePath;
 
         }
-
+        public PersonDTO() { }
     }
 }

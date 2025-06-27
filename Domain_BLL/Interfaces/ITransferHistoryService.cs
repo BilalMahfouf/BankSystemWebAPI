@@ -13,7 +13,7 @@ namespace Domain_BLL.Interfaces
     {
         Task<IEnumerable<ReadTransferHistoryDTO>> GetAllTransferHistoriesAsync();
         Task<ReadTransferHistoryDTO?> GetTransferHistoryByIdAsync(int transferHistoryID);
-        Task<bool> CreateTransferHistoryAsync(TransferHistoryDTO createTransferHistory);
+        Task<int> CreateTransferHistoryAsync(TransferHistoryDTO createTransferHistory);
         Task<bool> DeleteTransferHistoryAsync(int transferHistoryID);
     }
 }

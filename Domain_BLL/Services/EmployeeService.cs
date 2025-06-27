@@ -25,7 +25,7 @@ namespace Domain_BLL.Services
 
         public async Task<bool> CanCreateEmployeeAsync(int personID)
         {
-           return await _employeeData.isExistByIDAsync(personID);
+           return !(await _employeeData.isExistByIDAsync(personID));
         }
 
         public async Task<bool> CreateEmployeeAsync(EmployeeDTO NewEmployee)
@@ -34,6 +34,11 @@ namespace Domain_BLL.Services
             {
                 throw new ArgumentNullException(nameof(NewEmployee));
             }
+
+            bool canCreateEmployee = await CanCreateEmployeeAsync(NewEmployee.PersonID);
+            if (!canCreateEmployee) return false;
+
+
             Employee newEmployee = _mapper.Map<Employee>(NewEmployee);
 
             newEmployee.CreatedAt = DateTime.Now.ToUniversalTime();
@@ -59,9 +64,10 @@ namespace Domain_BLL.Services
         public async Task<IEnumerable<ReadEmployeeDTO>> GetAllEmployeesAsync()
         {
             IEnumerable<Employee> employees = await _employeeData.GetAllAsync();
-            IEnumerable<ReadEmployeeDTO> readEmployees = _mapper
+            
+                IEnumerable<ReadEmployeeDTO> readEmployees = _mapper
                 .Map<IEnumerable<ReadEmployeeDTO>>(employees);
-            return readEmployees;
+                return readEmployees;
         }
 
         public async Task<bool> UpdateEmployeeAsync(int employeeID,EmployeeDTO Employee)
@@ -70,10 +76,13 @@ namespace Domain_BLL.Services
             { 
                 throw new ArgumentNullException(nameof(Employee)); 
             }
-            Employee employee = _mapper.Map<Employee>(Employee);
-            employee.EmployeeID = employeeID;
-            employee.UpdatedAt = DateTime.Now.ToUniversalTime();
-            return await _employeeData.UpdateAsync(employee);
+            var updatedEmployee=await _employeeData.FindByIDAsync(employeeID);
+            if (updatedEmployee is null) return false;
+
+            _mapper.Map(Employee, updatedEmployee);
+            updatedEmployee.EmployeeID = employeeID;
+            updatedEmployee.UpdatedAt = DateTime.Now.ToUniversalTime();
+            return await _employeeData.UpdateAsync(updatedEmployee);
         }
     }
 }

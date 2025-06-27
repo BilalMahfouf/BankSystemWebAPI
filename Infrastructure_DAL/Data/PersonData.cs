@@ -12,8 +12,8 @@ namespace Infrastructure_DAL.Data
 {
     public class PersonData : IPersonData
     {
-        private readonly BankSystemDbContext _context;
-        public PersonData(BankSystemDbContext context)
+        private readonly BankSystemDb3Context _context;
+        public PersonData(BankSystemDb3Context context)
         {
             _context = context;
         }
@@ -24,8 +24,8 @@ namespace Infrastructure_DAL.Data
             {
                 throw new ArgumentNullException(nameof(NewPerson));
             }
-
-            await _context.AddAsync(NewPerson);
+            
+            await _context.People.AddAsync(NewPerson);
             return await _context.SaveChangesAsync() > 0;
         }
 
@@ -34,7 +34,7 @@ namespace Infrastructure_DAL.Data
             var Person = await _context.People.FindAsync(PersonID);
             if (Person is null) return false;
 
-            _context.Remove(Person);
+            _context.People.Remove(Person);
             return await _context.SaveChangesAsync() > 0;
         }
 
@@ -46,17 +46,17 @@ namespace Infrastructure_DAL.Data
 
         public async Task<IEnumerable<Person>> GetAllAsync()
         {
-            return await _context.People.ToListAsync();
+            return await _context.People.Include(p=>p.NationalityCountry).ToListAsync();
         }
 
-        public async Task<bool> UpdateAsync(Person Person)
+        public async Task<bool> UpdateAsync(Person person)
         {
-            if (Person is null)
+            if (person is null)
             {
-                throw new ArgumentNullException(nameof(Person));
+                throw new ArgumentNullException(nameof(person));
             }
 
-            _context.People.Update(Person);
+            _context.People.Update(person);
             return await _context.SaveChangesAsync() > 0;
         }
     }

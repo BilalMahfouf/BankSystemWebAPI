@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure_DAL.Persistence;
 
-public partial class BankSystemDbContext : DbContext
+public partial class BankSystemDb3Context : DbContext
 {
-    public BankSystemDbContext()
+    public BankSystemDb3Context()
     {
     }
 
-    public BankSystemDbContext(DbContextOptions<BankSystemDbContext> options)
+    public BankSystemDb3Context(DbContextOptions<BankSystemDb3Context> options)
         : base(options)
     {
     }
@@ -35,7 +35,7 @@ public partial class BankSystemDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:DefaultConnection");
+        => optionsBuilder.UseSqlServer("Server=localhost;Database=BankSystemDB3;User Id=sa;Password=sa123456;Encrypt=False;TrustServerCertificate=True;Connection Timeout=30;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -45,7 +45,6 @@ public partial class BankSystemDbContext : DbContext
 
             entity.HasIndex(e => e.PersonID, "UQ__Clients__AA2FFB846F611C96").IsUnique();
 
-            entity.Property(e => e.ClientID).ValueGeneratedNever();
             entity.Property(e => e.AccountNumber).HasMaxLength(50);
             entity.Property(e => e.Balance).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
@@ -64,7 +63,6 @@ public partial class BankSystemDbContext : DbContext
 
             entity.HasIndex(e => e.Name, "UQ__Countrie__737584F62C7401BE").IsUnique();
 
-            entity.Property(e => e.ID).ValueGeneratedNever();
             entity.Property(e => e.Name).HasMaxLength(100);
         });
 
@@ -72,7 +70,6 @@ public partial class BankSystemDbContext : DbContext
         {
             entity.HasKey(e => e.EmployeeID).HasName("PK__Employee__7AD04FF132614FD6");
 
-            entity.Property(e => e.EmployeeID).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.HireDate).HasColumnType("datetime");
             entity.Property(e => e.Salary).HasColumnType("decimal(18, 2)");
@@ -80,7 +77,6 @@ public partial class BankSystemDbContext : DbContext
 
             entity.HasOne(d => d.CreatedByUser).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.CreatedByUserID)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Employees__Creat__4F7CD00D");
 
             entity.HasOne(d => d.JobTitle).WithMany(p => p.Employees)
@@ -98,7 +94,6 @@ public partial class BankSystemDbContext : DbContext
         {
             entity.HasKey(e => e.JobID).HasName("PK__JobTitle__056690E2A12CE555");
 
-            entity.Property(e => e.JobID).ValueGeneratedNever();
             entity.Property(e => e.Title).HasMaxLength(100);
         });
 
@@ -108,7 +103,6 @@ public partial class BankSystemDbContext : DbContext
 
             entity.HasIndex(e => e.NationalNo, "UQ__People__E9AA1A65B7CAEA6D").IsUnique();
 
-            entity.Property(e => e.ID).ValueGeneratedNever();
             entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.DateOfbirth).HasColumnType("datetime");
@@ -130,7 +124,6 @@ public partial class BankSystemDbContext : DbContext
         {
             entity.HasKey(e => e.TransactionID).HasName("PK__Transact__55433A4B330B4A31");
 
-            entity.Property(e => e.TransactionID).ValueGeneratedNever();
             entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.TransactionDate).HasColumnType("datetime");
@@ -176,7 +169,6 @@ public partial class BankSystemDbContext : DbContext
 
             entity.ToTable("TransferHistory");
 
-            entity.Property(e => e.TransferID).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.TransferDate).HasColumnType("datetime");
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");
@@ -203,7 +195,6 @@ public partial class BankSystemDbContext : DbContext
 
             entity.HasIndex(e => e.UserName, "UQ__Users__C9F284568BA82B5A").IsUnique();
 
-            entity.Property(e => e.UserID).ValueGeneratedNever();
             entity.Property(e => e.CreatedAt).HasColumnType("datetime");
             entity.Property(e => e.Password).HasMaxLength(255);
             entity.Property(e => e.UpdatedAt).HasColumnType("datetime");

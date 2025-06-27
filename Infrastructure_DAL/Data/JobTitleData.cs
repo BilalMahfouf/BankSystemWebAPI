@@ -11,8 +11,8 @@ namespace Infrastructure_DAL.Data
 {
     public class JobTitleData
     {
-        private readonly BankSystemDbContext _context;
-        public JobTitleData(BankSystemDbContext contex) 
+        private readonly BankSystemDb3Context _context;
+        public JobTitleData(BankSystemDb3Context contex) 
         { 
         _context=contex;
         }

@@ -12,8 +12,8 @@ namespace Infrastructure_DAL.Data
 {
     public class UserData : IUserData
     {
-        private readonly BankSystemDbContext _context;
-        public UserData(BankSystemDbContext context)
+        private readonly BankSystemDb3Context _context;
+        public UserData(BankSystemDb3Context context)
         {
             _context = context;
         }
