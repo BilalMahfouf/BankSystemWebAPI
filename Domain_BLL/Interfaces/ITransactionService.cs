@@ -14,8 +14,8 @@ namespace Domain_BLL.Interfaces
     {
         Task<IEnumerable<ReadTransactionDTO>> GetAllTransactionsAsync();
         Task<ReadTransactionDTO?> GetTransactionByIdAsync(int transactionID);
-        Task<int> Deposit(TransactionDTO transaction);
-        Task<int> Withdraw(TransactionDTO transaction);
+        Task<int> DepositAsync(TransactionDTO transaction);
+        Task<int> WithdrawAsync(TransactionDTO transaction);
         Task<bool> DeleteTransactionAsync(int transactionID);
         Task<int> TransferAsync(TransferRequestDTO transferRequest);
     }

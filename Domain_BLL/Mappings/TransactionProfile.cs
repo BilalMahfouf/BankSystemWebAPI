@@ -30,6 +30,7 @@ namespace Domain_BLL.Mappings
                .ForMember(dest => dest.Client, opt => opt.Ignore())
                 .ForMember(dest => dest.TransactionType, opt => opt.Ignore())
                  .ForMember(dest => dest.CreatedByUser, opt => opt.Ignore())
+                 .ForMember(dest => dest.TransferID, opt => opt.Ignore())
                .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())
                .ForMember(dest => dest.UpdatedAt, opt => opt.Ignore());
 

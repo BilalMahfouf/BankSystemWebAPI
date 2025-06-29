@@ -38,7 +38,7 @@ namespace Domain_BLL.Services
             return await _transactionData.DeleteAsync(transactionID);
         }
 
-        public async Task<int> Deposit(TransactionDTO transaction)
+        public async Task<int> DepositAsync(TransactionDTO transaction)
         {
             if (transaction == null)
             {
@@ -87,17 +87,17 @@ namespace Domain_BLL.Services
                 throw new ArgumentNullException(nameof(transferRequest));
             }
 
-            // 1. Withdraw from source
+            // 1. WithdrawAsync from source
             TransactionDTO withdrawDTO = new(transferRequest.FromClientID, transferRequest.Amount
-                , transferRequest.TransferDate, transferRequest.Notes, transferRequest.CreatedByUserID, null);
-            int withdrawID = await Withdraw(withdrawDTO);
+                , transferRequest.TransferDate, transferRequest.Notes, transferRequest.CreatedByUserID);
+            int withdrawID = await WithdrawAsync(withdrawDTO);
             if (withdrawID <= 0) return 0;
 
-            // 2. Deposit to destination 
+            // 2. DepositAsync to destination 
             TransactionDTO depositDTO = new TransactionDTO(transferRequest.ToClientID
                 , transferRequest.Amount, transferRequest.TransferDate
-                , transferRequest.Notes, transferRequest.CreatedByUserID, null);
-            int  depositID = await Deposit(depositDTO);
+                , transferRequest.Notes, transferRequest.CreatedByUserID);
+            int  depositID = await DepositAsync(depositDTO);
             if (depositID <= 0) return 0;
 
             // 3. Log transfer history
@@ -117,7 +117,7 @@ namespace Domain_BLL.Services
             return insertedID;
         }
 
-        public async Task<int> Withdraw(TransactionDTO transaction)
+        public async Task<int> WithdrawAsync(TransactionDTO transaction)
         {
             if (transaction == null)
             {
