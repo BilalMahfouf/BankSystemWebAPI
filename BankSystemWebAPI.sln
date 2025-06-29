@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36212.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain_BLL", "Domain_BLL\Domain_BLL.csproj", "{FEDFDBCC-4657-418C-80AC-DF141EB3D9C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "Domain_BLL\BusinessLogicLayer.csproj", "{FEDFDBCC-4657-418C-80AC-DF141EB3D9C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure_DAL", "Infrastructure_DAL\Infrastructure_DAL.csproj", "{79B5A7C4-0699-4E71-8A90-1DCEEA49D0EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "Infrastructure_DAL\DataAccessLayer.csproj", "{79B5A7C4-0699-4E71-8A90-1DCEEA49D0EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{E82864E5-FA0B-412F-8990-E8DD6E79ABC7}"
 EndProject

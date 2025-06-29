@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain_BLL\Domain_BLL.csproj" />
+    <ProjectReference Include="..\Domain_BLL\BusinessLogicLayer.csproj" />
   </ItemGroup>
 
 </Project>

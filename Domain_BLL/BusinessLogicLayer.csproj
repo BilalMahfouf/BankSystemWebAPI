@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Infrastructure_DAL\Infrastructure_DAL.csproj" />
+    <ProjectReference Include="..\Infrastructure_DAL\DataAccessLayer.csproj" />
   </ItemGroup>
 
 </Project>
