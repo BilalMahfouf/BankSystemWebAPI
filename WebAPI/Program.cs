@@ -16,6 +16,15 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<BankSystemDb3Context>();
 builder.Services.AddAutoMapper(typeof(PersonProfile));
 
+builder.Services.AddScoped<CountryData>();
+builder.Services.AddScoped<CountryService>();
+
+builder.Services.AddScoped<JobTitleData>();
+builder.Services.AddScoped<JobTitleService>();
+
+builder.Services.AddScoped<TransactionTypeData>();
+builder.Services.AddScoped<TransactionTypeService>();
+
 builder.Services.AddScoped<IClientData, ClientData>();
 builder.Services.AddScoped<IClientService, ClientService>();
 
