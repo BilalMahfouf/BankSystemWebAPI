@@ -18,14 +18,15 @@ namespace Infrastructure_DAL.Data
             _context = context;
         }
 
-        public async Task<bool> AddNewAsync(Employee NewEmployee)
+        public async Task<int> AddNewAsync(Employee NewEmployee)
         {
             if(NewEmployee is null)
             {
                 throw new ArgumentNullException(nameof(NewEmployee));
             }
            await _context.Employees.AddAsync(NewEmployee);
-            return await _context.SaveChangesAsync() > 0;
+            await _context.SaveChangesAsync();
+            return NewEmployee.EmployeeID;
         }
 
         public async Task<bool> DeleteAsync(int EmployeeID)

@@ -11,7 +11,7 @@ namespace Domain_BLL.Interfaces
     {
         Task<IEnumerable<ReadPersonDTO>> GetAllPeopleAsync();
         Task<ReadPersonDTO?> FindPersonByIDAsync(int personID);
-        Task<bool> CreatePersonAsync(PersonDTO newPerson);
+        Task<int> CreatePersonAsync(PersonDTO newPerson);
         Task<bool> UpdatePersonAsync(int personID,PersonDTO person);
         Task<bool> DeletePersonAsync(int personID);
 

@@ -11,7 +11,7 @@ namespace Infrastructure_DAL.Interfaces
     {
         Task<IEnumerable<Client>> GetAllAsync();
         Task<Client?> FindByIDAsync(int ClientID);
-        Task<bool> AddNewAsync(Client NewClient);
+        Task<int> AddNewAsync(Client NewClient);
         Task<bool> UpdateAsync(Client Client);
         Task<bool> DeleteAsync(int ClientID);
         Task<decimal> GetBalanceAsync(int ClientID);

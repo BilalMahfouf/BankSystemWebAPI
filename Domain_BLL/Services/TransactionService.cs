@@ -38,7 +38,7 @@ namespace Domain_BLL.Services
             return await _transactionData.DeleteAsync(transactionID);
         }
 
-        public async Task<bool> Deposit(TransactionDTO transaction)
+        public async Task<int> Deposit(TransactionDTO transaction)
         {
             if (transaction == null)
             {
@@ -55,11 +55,8 @@ namespace Domain_BLL.Services
             deposit.CreatedAt = DateTime.UtcNow;
             deposit.UpdatedAt= DateTime.UtcNow;
 
-            if (await _transactionData.AddNewAsync(deposit))
-            {
-                return deposit.TransactionStatus == 1 ? true : false;
-            }
-            return false;
+            var insertedID = await _transactionData.AddNewAsync(deposit);
+            return insertedID;
         }
 
         public async Task<IEnumerable<ReadTransactionDTO>> GetAllTransactionsAsync()
@@ -83,7 +80,7 @@ namespace Domain_BLL.Services
         
         }
         
-        public async Task<bool> TransferAsync(TransferRequestDTO transferRequest)
+        public async Task<int> TransferAsync(TransferRequestDTO transferRequest)
         {
            if(transferRequest is null)
             {
@@ -93,15 +90,15 @@ namespace Domain_BLL.Services
             // 1. Withdraw from source
             TransactionDTO withdrawDTO = new(transferRequest.FromClientID, transferRequest.Amount
                 , transferRequest.TransferDate, transferRequest.Notes, transferRequest.CreatedByUserID, null);
-            bool IsWithdraw = await Withdraw(withdrawDTO);
-            if (!IsWithdraw) return false;
+            int withdrawID = await Withdraw(withdrawDTO);
+            if (withdrawID <= 0) return 0;
 
             // 2. Deposit to destination 
             TransactionDTO depositDTO = new TransactionDTO(transferRequest.ToClientID
                 , transferRequest.Amount, transferRequest.TransferDate
                 , transferRequest.Notes, transferRequest.CreatedByUserID, null);
-            bool IsDeposit = await Deposit(depositDTO);
-            if (!IsDeposit) return false;
+            int  depositID = await Deposit(depositDTO);
+            if (depositID <= 0) return 0;
 
             // 3. Log transfer history
             TransferHistoryDTO transferHistory = new TransferHistoryDTO
@@ -116,11 +113,11 @@ namespace Domain_BLL.Services
                 , TransferStatus, transferRequest.Notes, transferRequest.CreatedByUserID, TransferID
                 , DateTime.UtcNow, DateTime.UtcNow);
             TransferTransaction.TransferID = TransferID > 0 ? TransferID : null;
-            return await _transactionData.AddNewAsync(TransferTransaction);
-
+            var insertedID= await _transactionData.AddNewAsync(TransferTransaction);
+            return insertedID;
         }
 
-        public async Task<bool> Withdraw(TransactionDTO transaction)
+        public async Task<int> Withdraw(TransactionDTO transaction)
         {
             if (transaction == null)
             {
@@ -139,11 +136,8 @@ namespace Domain_BLL.Services
             withdraw.CreatedAt = DateTime.UtcNow;
             withdraw.UpdatedAt = DateTime.UtcNow;
 
-            if (await _transactionData.AddNewAsync(withdraw))
-            {
-                return withdraw.TransactionStatus == 1 ? true : false;
-            }
-            return false;
+            var insertedID = await _transactionData.AddNewAsync(withdraw);
+            return insertedID;
         }
     }
 

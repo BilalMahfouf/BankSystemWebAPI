@@ -46,7 +46,7 @@ namespace Domain_BLL.Services
             return _userData.isExistByIDAsync(employeeID);
         }
 
-        public async Task<bool> CreateUserAsync(UserDTO newUser)
+        public async Task<int> CreateUserAsync(UserDTO newUser)
         {
             if(newUser is null)
             {
@@ -55,7 +55,8 @@ namespace Domain_BLL.Services
             User NewUser = _mapper.Map<User>(newUser);
             NewUser.CreatedAt = DateTime.UtcNow;
             NewUser.UpdatedAt = DateTime.UtcNow;
-            return await _userData.AddNewAsync(NewUser);
+            var insertedID = await _userData.AddNewAsync(NewUser);
+            return insertedID;
         }
 
         public async Task<bool> DeActivateUser(int userID)

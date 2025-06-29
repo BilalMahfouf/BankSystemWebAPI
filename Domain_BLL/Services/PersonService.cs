@@ -23,7 +23,7 @@ namespace Domain_BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> CreatePersonAsync(PersonDTO newPerson)
+        public async Task<int> CreatePersonAsync(PersonDTO newPerson)
         {
             if (newPerson is null)
             {
@@ -33,7 +33,8 @@ namespace Domain_BLL.Services
 
             person.CreatedAt = DateTime.Now.ToUniversalTime();
             person.UpdatedAt = DateTime.Now.ToUniversalTime();
-            return await _personData.AddNewAsync(person);
+            int insertedID = await _personData.AddNewAsync(person);
+            return insertedID;
         }
         
 

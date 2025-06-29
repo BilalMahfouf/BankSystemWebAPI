@@ -11,7 +11,7 @@ namespace Infrastructure_DAL.Interfaces
     {
         Task<IEnumerable<Employee>> GetAllAsync();
         Task<Employee?> FindByIDAsync(int EmployeeID);
-        Task<bool> AddNewAsync(Employee NewEmployee);
+        Task<int> AddNewAsync(Employee NewEmployee);
         Task<bool> UpdateAsync(Employee Employee);
         Task<bool> DeleteAsync(int EmployeeID);
 

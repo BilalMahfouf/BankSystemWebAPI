@@ -18,7 +18,7 @@ namespace Infrastructure_DAL.Data
             _context = context;
         }
 
-        public async Task<bool> AddNewAsync(Transaction NewTransaction)
+        public async Task<int> AddNewAsync(Transaction NewTransaction)
         {
            if (NewTransaction is null)
             {
@@ -26,7 +26,8 @@ namespace Infrastructure_DAL.Data
             }
            
             await _context.Transactions.AddAsync(NewTransaction);
-            return await _context.SaveChangesAsync() > 0;
+             await _context.SaveChangesAsync();
+            return NewTransaction.TransactionID;
         }
 
         public async Task<bool> DeleteAsync(int TransactionID)

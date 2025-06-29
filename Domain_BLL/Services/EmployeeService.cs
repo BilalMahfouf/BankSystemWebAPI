@@ -28,7 +28,7 @@ namespace Domain_BLL.Services
            return !(await _employeeData.isExistByIDAsync(personID));
         }
 
-        public async Task<bool> CreateEmployeeAsync(EmployeeDTO NewEmployee)
+        public async Task<int> CreateEmployeeAsync(EmployeeDTO NewEmployee)
         {
             if (NewEmployee == null)
             {
@@ -36,16 +36,16 @@ namespace Domain_BLL.Services
             }
 
             bool canCreateEmployee = await CanCreateEmployeeAsync(NewEmployee.PersonID);
-            if (!canCreateEmployee) return false;
+            if (!canCreateEmployee) return 0;
 
 
             Employee newEmployee = _mapper.Map<Employee>(NewEmployee);
 
             newEmployee.CreatedAt = DateTime.Now.ToUniversalTime();
             newEmployee.UpdatedAt = DateTime.Now.ToUniversalTime();
-            return await _employeeData.AddNewAsync(newEmployee);
-
-            }
+            var insertedID = await _employeeData.AddNewAsync(newEmployee);
+            return insertedID;
+        }
 
         public Task<bool> DeleteEmployeeAsync(int EmployeeID)
         {

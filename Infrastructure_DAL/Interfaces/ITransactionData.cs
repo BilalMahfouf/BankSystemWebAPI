@@ -11,7 +11,7 @@ namespace Infrastructure_DAL.Interfaces
     {
         Task<IEnumerable<Transaction>> GetAllAsync();
         Task<Transaction?> FindByIDAsync(int TransactionID);
-        Task<bool> AddNewAsync(Transaction NewTransaction);
+        Task<int> AddNewAsync(Transaction NewTransaction);
         Task<bool> UpdateAsync(Transaction Transaction);
         Task<bool> DeleteAsync(int TransactionID);
     }

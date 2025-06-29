@@ -19,14 +19,15 @@ namespace Infrastructure_DAL.Data
             _context = context;
         }
 
-        public async Task<bool> AddNewAsync(Client NewClient)
+        public async Task<int> AddNewAsync(Client NewClient)
         {
             if(NewClient is null)
             {
                 throw new ArgumentNullException(nameof(NewClient));
             }
            await _context.Clients.AddAsync(NewClient);
-            return await _context.SaveChangesAsync() > 0;
+            await _context.SaveChangesAsync();
+            return NewClient.ClientID;
             
         }
 

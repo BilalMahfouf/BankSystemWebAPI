@@ -40,7 +40,7 @@ namespace Domain_BLL.Services
             client.UpdatedAt = DateTime.Now.ToUniversalTime();
             return await _clientData.UpdateAsync(client);
         }
-        public async Task<bool> CreateClientAsync(ClientDTO NewClient)
+        public async Task<int> CreateClientAsync(ClientDTO NewClient)
         {
             if(NewClient is null)
             {
@@ -50,7 +50,9 @@ namespace Domain_BLL.Services
 
             newClient.CreatedAt = DateTime.Now.ToUniversalTime();   
             newClient.UpdatedAt = DateTime.Now.ToUniversalTime();
-            return await _clientData.AddNewAsync(newClient);
+            var insertedID = await _clientData.AddNewAsync(newClient);
+
+            return insertedID;
         }
         public Task<bool> DeleteClientAsync(int ClientID)
         {

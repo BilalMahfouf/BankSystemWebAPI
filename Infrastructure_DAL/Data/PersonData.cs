@@ -18,7 +18,7 @@ namespace Infrastructure_DAL.Data
             _context = context;
         }
 
-        public async Task<bool> AddNewAsync(Person NewPerson)
+        public async Task<int> AddNewAsync(Person NewPerson)
         {
             if (NewPerson is null)
             {
@@ -26,7 +26,9 @@ namespace Infrastructure_DAL.Data
             }
             
             await _context.People.AddAsync(NewPerson);
-            return await _context.SaveChangesAsync() > 0;
+            await _context.SaveChangesAsync();
+            return NewPerson.ID;
+
         }
 
         public async Task<bool> DeleteAsync(int PersonID)

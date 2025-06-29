@@ -13,7 +13,7 @@ namespace Domain_BLL.Interfaces
     {
         Task<IEnumerable<ReadClientDTO>> GetAllClientsAsync();
         Task<ReadClientDTO?> FindClientByIDAsync(int ClientID);
-        Task<bool> CreateClientAsync(ClientDTO NewClient);
+        Task<int> CreateClientAsync(ClientDTO NewClient);
         Task<bool> UpdateClientAsync(int clientID,ClientDTO Client);
         Task<bool> DeleteClientAsync(int ClientID);
         Task<bool> ActivateClientAsync(int clientID);
