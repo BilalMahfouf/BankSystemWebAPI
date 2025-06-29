@@ -15,8 +15,8 @@ namespace Domain_BLL.Interfaces
         Task<bool> UpdateUserAsync(int userID, UserDTO updatedUserName);
         Task<bool> DeleteUserAsync(int userID);
         Task<bool> CanCreateUserAsync(int employeeID);
-        Task<bool> ActivateUser(int userID);
-        Task<bool> DeActivateUser(int userID);
+        Task<bool> ActivateUserAsync(int userID);
+        Task<bool> DeActivateUserAsync(int userID);
 
     }
 }

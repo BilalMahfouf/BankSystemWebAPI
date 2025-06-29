@@ -23,7 +23,7 @@ namespace Domain_BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> ActivateUser(int userID)
+        public async Task<bool> ActivateUserAsync(int userID)
         {
             if(userID < 0)
             {
@@ -37,13 +37,13 @@ namespace Domain_BLL.Services
             return await _userData.UpdateAsync(user);
         }
 
-        public Task<bool> CanCreateUserAsync(int employeeID)
+        public async Task<bool> CanCreateUserAsync(int employeeID)
         {
             if(employeeID < 0)
             {
                 throw new ArgumentNullException(nameof(employeeID));
             }
-            return _userData.isExistByIDAsync(employeeID);
+            return !(await _userData.isExistByIDAsync(employeeID));
         }
 
         public async Task<int> CreateUserAsync(UserDTO newUser)
@@ -59,7 +59,7 @@ namespace Domain_BLL.Services
             return insertedID;
         }
 
-        public async Task<bool> DeActivateUser(int userID)
+        public async Task<bool> DeActivateUserAsync(int userID)
         {
             if (userID < 0)
             {
