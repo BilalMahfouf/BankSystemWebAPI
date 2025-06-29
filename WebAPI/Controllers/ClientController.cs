@@ -147,6 +147,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"EX: {ex}");
                 return Conflict("Client cannot be deleted because it is referenced by " +
                     "other data.");
             }
